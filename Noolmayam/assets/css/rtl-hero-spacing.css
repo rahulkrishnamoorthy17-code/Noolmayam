@@ -1,0 +1,209 @@
+/* NOOLMAYAM — shared RTL hero and spacing corrective stylesheet.
+   Loaded AFTER legacy theme files to resolve conflicting direction overrides. */
+
+/* The weaving showcase should lead naturally into the next section,
+   without stacking the previous section's 100px bottom padding on top
+   of the following section's 100px top padding. */
+.split-highlight-section {
+  padding-block-start: 0 !important;
+  padding-block-end: 22px !important;
+}
+.split-highlight-section + .tactile-chapters {
+  padding-block-start: clamp(34px, 4vw, 58px) !important;
+}
+.split-highlight-panel {
+  min-width:0;
+  margin-block-end:0;
+}
+.split-highlight-panel > * {min-width:0;}
+.split-highlight-image {height:100%;min-height:300px;overflow:hidden;}
+.split-highlight-image img {height:100%;min-height:300px;max-height:540px;object-fit:cover;}
+.split-highlight-copy {
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center!important;
+  padding:clamp(28px,3.6vw,48px) clamp(18px,3.3vw,48px)!important;
+}
+.split-highlight-copy h2 {line-height:1.08;text-wrap:balance;}
+.split-highlight-copy p {max-width:660px;margin-inline:auto!important;line-height:1.78;}
+.split-highlight-copy .btn {margin-block-start:22px!important;}
+
+/* Keep standard heroes in a stable two-column grid (no auto reordering).
+   LTR: copy left, image right. RTL: image left, copy right. */
+.page-hero .page-hero-grid,
+.compact-hero .page-hero-grid {
+  display:grid!important;
+  direction:ltr!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.02fr)!important;
+  align-items:center!important;
+}
+.page-hero .page-hero-grid > .hero-copy,
+.compact-hero .page-hero-grid > .hero-copy {
+  grid-column:1!important;grid-row:1!important;order:0!important;
+  direction:ltr!important;text-align:center!important;
+  width:100%;min-width:0;
+}
+.page-hero .page-hero-grid > .hero-art,
+.compact-hero .page-hero-grid > .hero-art {
+  grid-column:2!important;grid-row:1!important;order:0!important;
+  width:100%;min-width:0;
+}
+html[dir="rtl"] .page-hero .page-hero-grid > .hero-copy,
+html[dir="rtl"] .compact-hero .page-hero-grid > .hero-copy {
+  grid-column:2!important;grid-row:1!important;
+  direction:rtl!important;
+}
+html[dir="rtl"] .page-hero .page-hero-grid > .hero-art,
+html[dir="rtl"] .compact-hero .page-hero-grid > .hero-art {
+  grid-column:1!important;grid-row:1!important;
+}
+/* English editorial type remains left-to-right inside an RTL-centered block,
+   so punctuation and line breaks do not appear reversed. */
+html[dir="rtl"] .page-hero .hero-copy h1,
+html[dir="rtl"] .page-hero .hero-copy p,
+html[dir="rtl"] .page-hero .hero-copy .eyebrow,
+html[dir="rtl"] .page-hero .hero-copy .button-row {
+  direction:ltr!important;text-align:center!important;
+}
+
+/* Home 2: deliberately different indigo hero; reverse columns only in RTL. */
+.reference-home2-grid {direction:ltr!important;grid-template-columns:minmax(0,.91fr) minmax(0,1.09fr)!important;}
+.reference-home2-grid > .reference-home2-copy {
+  grid-column:1!important;grid-row:1!important;order:0!important;
+  direction:ltr!important;min-width:0;
+}
+.reference-home2-grid > .reference-home2-frame {
+  grid-column:2!important;grid-row:1!important;order:0!important;
+  min-width:0;
+}
+html[dir="rtl"] .reference-home2-grid > .reference-home2-copy {
+  grid-column:2!important;grid-row:1!important;direction:rtl!important;
+}
+html[dir="rtl"] .reference-home2-grid > .reference-home2-frame {
+  grid-column:1!important;grid-row:1!important;
+}
+html[dir="rtl"] .reference-home2-copy h1,
+html[dir="rtl"] .reference-home2-copy p,
+html[dir="rtl"] .reference-home2-copy .eyebrow,
+html[dir="rtl"] .reference-home2-copy .button-row {
+  direction:ltr!important;text-align:center!important;
+}
+
+/* Home 1 uses the SAME hero photo as before, carried on a separate image
+   layer that mirrors safely for RTL without mirroring any text. */
+.reference-home-hero {
+  position:relative;isolation:isolate;overflow:hidden;
+  background:#25121c!important;
+  background-image:none!important;
+}
+.reference-home-hero > .reference-home-overlay {
+  display:block!important;position:absolute;inset:0;z-index:0;
+  background:url('../images/hero-handloom-atelier.webp') center 45% / cover no-repeat;
+  transform:none;pointer-events:none;
+}
+.reference-home-hero::before {
+  content:""!important;position:absolute!important;inset:0!important;
+  z-index:1!important;pointer-events:none;
+  background:linear-gradient(90deg,rgba(29,12,20,.91),rgba(29,12,20,.70) 35%,rgba(29,12,20,.08) 82%)!important;
+}
+.reference-home-hero > .reference-home-inner {
+  display:flex!important;direction:ltr!important;
+  justify-content:flex-start!important;position:relative;z-index:2!important;
+}
+.reference-home-copy {direction:ltr!important;margin:0!important;}
+html[dir="rtl"] .reference-home-hero > .reference-home-overlay {
+  transform:scaleX(-1)!important;
+}
+html[dir="rtl"] .reference-home-hero::before {
+  background:linear-gradient(270deg,rgba(29,12,20,.91),rgba(29,12,20,.70) 35%,rgba(29,12,20,.08) 82%)!important;
+}
+html[dir="rtl"] .reference-home-hero > .reference-home-inner {
+  justify-content:flex-end!important;
+}
+html[dir="rtl"] .reference-home-copy {direction:ltr!important;margin:0!important;}
+html[dir="rtl"] .reference-home-copy > * {text-align:center!important;}
+
+/* Supporting editorial splits can mirror too. Earlier files forced LTR even
+   when the document was RTL; this restores logical, direction-aware grids. */
+html[dir="rtl"] .split-highlight-panel,
+html[dir="rtl"] .wardrobe-panel,
+html[dir="rtl"] .studio-showcase-panel,
+html[dir="rtl"] .journal-teaser-grid,
+html[dir="rtl"] .split-editorial {
+  direction:rtl!important;
+}
+html[dir="rtl"] .split-highlight-panel > *,
+html[dir="rtl"] .wardrobe-panel > *,
+html[dir="rtl"] .studio-showcase-panel > *,
+html[dir="rtl"] .journal-teaser-grid > *,
+html[dir="rtl"] .split-editorial > * {order:0!important;}
+/* Text stays centered inside its panel, while form controls and other
+   page content continue honoring the document direction. */
+html[dir="rtl"] .split-highlight-copy,
+html[dir="rtl"] .wardrobe-copy,
+html[dir="rtl"] .studio-showcase-copy,
+html[dir="rtl"] .split-copy {
+  text-align:center!important;
+}
+
+/* Six equally sized Weaver Stories cards; consistent image crop and
+   read-story link alignment, including a complete last row. */
+.stories-grid {align-items:stretch;}
+.story-large-card {height:100%;min-width:0;overflow:hidden;border-radius:18px;}
+.story-large-card > div:first-child {height:clamp(215px,20vw,275px);}
+.story-large-card > div:first-child img {width:100%;height:100%;object-fit:cover;}
+.story-large-copy {display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;}
+.story-large-copy h3 {line-height:1.12;text-wrap:balance;}
+.story-large-copy p {flex:1;margin-block:0 24px;}
+.story-large-copy .text-link {margin-block-start:auto;align-self:center;}
+
+@media(max-width:900px) {
+  /* A readable text-first stacked hero on narrow screens in BOTH directions. */
+  .page-hero .page-hero-grid,
+  .compact-hero .page-hero-grid,
+  .reference-home2-grid {
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:clamp(20px,4vw,32px)!important;
+  }
+  .page-hero .page-hero-grid > .hero-copy,
+  html[dir="rtl"] .page-hero .page-hero-grid > .hero-copy,
+  .reference-home2-grid > .reference-home2-copy,
+  html[dir="rtl"] .reference-home2-grid > .reference-home2-copy {
+    grid-column:1!important;grid-row:1!important;
+  }
+  .page-hero .page-hero-grid > .hero-art,
+  html[dir="rtl"] .page-hero .page-hero-grid > .hero-art,
+  .reference-home2-grid > .reference-home2-frame,
+  html[dir="rtl"] .reference-home2-grid > .reference-home2-frame {
+    grid-column:1!important;grid-row:2!important;
+  }
+  .reference-home-hero > .reference-home-inner,
+  html[dir="rtl"] .reference-home-hero > .reference-home-inner {
+    justify-content:center!important;
+  }
+  .reference-home-hero::before,
+  html[dir="rtl"] .reference-home-hero::before {
+    background:linear-gradient(90deg,rgba(29,12,20,.77),rgba(29,12,20,.53))!important;
+  }
+  .split-highlight-panel,.wardrobe-panel,.studio-showcase-panel,.journal-teaser-grid,
+  html[dir="rtl"] .split-highlight-panel,html[dir="rtl"] .wardrobe-panel,
+  html[dir="rtl"] .studio-showcase-panel,html[dir="rtl"] .journal-teaser-grid {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .stories-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:560px) {
+  .stories-grid {grid-template-columns:minmax(0,1fr)!important;}
+  .split-highlight-section {padding-block-end:16px!important;}
+  .split-highlight-section + .tactile-chapters {padding-block-start:30px!important;}
+  .split-highlight-image {min-height:235px;}
+  .split-highlight-image img {min-height:235px;max-height:350px;}
+  .reference-home-hero > .reference-home-overlay {
+    background-position:66% center;
+  }
+  html[dir="rtl"] .reference-home-hero > .reference-home-overlay {
+    background-position:66% center;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .reference-home-hero > .reference-home-overlay {transition:none!important;}
+}

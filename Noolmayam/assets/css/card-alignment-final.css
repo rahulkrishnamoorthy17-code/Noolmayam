@@ -1,0 +1,130 @@
+/* NOOLMAYAM • Blog card alignment and consistent editorial card spacing
+   Keeps card images, category labels, titles, descriptions and links lined up
+   across each grid row in light/dark modes and LTR/RTL layouts. */
+
+/* Each article occupies the full width and height of its grid cell. */
+.journal-grid,
+.related-journal-grid {
+  align-items: stretch !important;
+  column-gap: clamp(16px, 1.6vw, 24px) !important;
+  row-gap: clamp(18px, 2vw, 28px) !important;
+}
+.journal-grid > .journal-card,
+.related-journal-grid > .journal-card {
+  min-width: 0;
+  height: 100%;
+}
+.journal-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  overflow: hidden;
+  min-width: 0;
+  height: 100%;
+}
+.journal-card .journal-photo {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 16 / 10.5;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+.journal-card .journal-photo > img,
+.journal-card .journal-photo > .atlas-image {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* Four matching text slots: category / title / summary / action. */
+.journal-card .journal-body {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 22px minmax(82px, auto) minmax(57px, auto) minmax(28px, 1fr);
+  align-content: stretch;
+  align-items: center;
+  justify-items: center;
+  row-gap: 10px !important;
+  flex: 1 1 auto;
+  min-height: 0 !important;
+  width: 100%;
+  padding: 18px clamp(16px, 1.6vw, 24px) 23px !important;
+  text-align: center !important;
+}
+.journal-card .journal-body > .eyebrow {
+  display: block;
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  min-height: 0;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  text-align: center;
+}
+.journal-card .journal-body > h3 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-height: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  overflow-wrap: break-word;
+}
+.journal-card .journal-body > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 40ch;
+  min-height: 0 !important;
+  margin: 0 !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+}
+.journal-card .journal-body > .text-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: end;
+  white-space: nowrap;
+  min-height: 26px;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Similar CTA rhythm for story cards while preserving their editorial typography. */
+.stories-grid > .story-large-card { height: 100%; min-width: 0; }
+.story-large-card .story-large-copy { flex: 1; display: flex; flex-direction: column; }
+.story-large-card .story-large-copy .text-link { margin-top: auto; padding-top: 14px; }
+
+/* Tablet cards need a little more headline room when there are two columns. */
+@media (min-width: 581px) and (max-width: 1020px) {
+  .journal-card .journal-body {
+    grid-template-rows: 22px minmax(94px, auto) minmax(70px, auto) minmax(28px, 1fr);
+  }
+}
+
+/* Single column: preserve readable natural content rhythm without empty slots. */
+@media (max-width: 580px) {
+  .journal-grid,
+  .related-journal-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 18px !important;
+  }
+  .journal-card .journal-body {
+    grid-template-rows: auto auto auto minmax(28px, auto);
+    row-gap: 12px !important;
+    padding: 20px 18px 22px !important;
+  }
+  .journal-card .journal-body > h3 { min-height: 0 !important; }
+  .journal-card .journal-body > p { min-height: 0 !important; }
+  .journal-card .journal-body > .text-link { margin-top: 6px !important; }
+}

@@ -1,0 +1,31 @@
+/* NOOLMAYAM | unified editorial heading treatment, 10 Nov 2026
+   All text headings are in natural sentence case; accent applies through COLOR only.
+   Existing responsive spacing and page layouts are intentionally retained. */
+:root{--heading-accent-color:#923e51}
+:root[data-theme="dark"]{--heading-accent-color:#eda6b1}
+body :is(h1,h2,h3,h4),
+body :is(h1,h2,h3,h4) :is(em,i,strong,b,span){
+  font-family:var(--serif)!important;
+  font-style:normal!important;
+  text-transform:none!important;
+  font-variant:normal;
+  letter-spacing:-.028em;
+}
+body :is(h1,h2,h3,h4){font-weight:600!important;text-wrap:balance;overflow-wrap:break-word}
+body :is(h1,h2,h3,h4) .heading-accent{
+  color:var(--heading-accent-color);
+  font-style:normal!important;
+  font-weight:inherit!important;
+  letter-spacing:inherit!important;
+  text-decoration:none!important;
+}
+/* Dark-background hero and banners retain a visible, warm accent. */
+body :is(.royal-hero,.loom-hero,.heritage-banner,.dark-textile,.craft-steps-section,.closing-panel,.royal-closing-box,.ending-invitation)
+:is(h1,h2,h3,h4) .heading-accent{color:#f1c792!important}
+/* Small editorial labels also use sentence case and readable, quieter spacing. */
+body .eyebrow{font-style:normal!important;text-transform:none!important;letter-spacing:.11em!important;font-weight:750}
+/* Protect labels/cards from forced uppercase and italic decoration. */
+body :is(.section-heading,.section-head,.about-manifesto,.story-detail-intro,.journal-detail-intro,.split-copy,.hero-copy) :is(h1,h2,h3,h4){font-style:normal!important;text-transform:none!important}
+@media(max-width:560px){
+  body :is(h1,h2,h3,h4){overflow-wrap:break-word;hyphens:manual;letter-spacing:-.02em}
+}
